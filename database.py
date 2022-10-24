@@ -14,6 +14,24 @@ def get_items(id=None):
     items = [ {'id':item[0] ,'desc':item[1]} for item in items ]
     return items
 
+def add_item(description):
+    cursor = connection.cursor()
+    cursor.execute(f"insert into list (description) values ('{description}')")
+    connection.commit()
+
+def delete_item(id):
+    cursor = connection.cursor()
+    cursor.execute(f"delete from list where id={id}")
+    connection.commit()
+
+def update_item(id, description):
+    cursor = connection.cursor()
+    cursor.execute(f"update list set description='{description}' where id={id}")
+    connection.commit()
+
+
+# Testing functions
+
 def test_get_items():
     print("testing get_items...")
     items = get_items()
@@ -25,11 +43,6 @@ def test_get_items():
     assert type(items[0]['id']) is int
     assert type(items[0]['desc']) is str
     pass
-
-def add_item(description):
-    cursor = connection.cursor()
-    cursor.execute(f"insert into list (description) values ('{description}')")
-    connection.commit()
 
 import time
 
@@ -44,11 +57,6 @@ def test_add_item():
     item = items[-1]
     assert description == item['desc']
 
-def delete_item(id):
-    cursor = connection.cursor()
-    cursor.execute(f"delete from list where id={id}")
-    connection.commit()
-
 def test_delete_item():
     print("testing delete_item...")
     description = random_string()
@@ -60,11 +68,6 @@ def test_delete_item():
     items = get_items()
     for item in items:
         assert description != item['desc']
-
-def update_item(id, description):
-    cursor = connection.cursor()
-    cursor.execute(f"update list set description='{description}' where id={id}")
-    connection.commit()
 
 def test_update_item():
     print("testing update_item...")
@@ -84,6 +87,8 @@ def test_update_item():
             new_found = True
         assert item['desc'] != description
     assert new_found
+
+
 
 if __name__ == "__main__":
     test_get_items()
