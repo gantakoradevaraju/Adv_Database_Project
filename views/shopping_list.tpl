@@ -13,6 +13,9 @@
 % end
 </table>
 <hr/>
-<a href="/add">Add new item...</a>
+<form action="/add" method="post">
+  <p>Add new item: <input name="description"/></p>
+  <p><button type="submit">Submit</button>
+</form>
 </body>
 </html>
