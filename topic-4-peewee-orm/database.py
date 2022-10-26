@@ -39,9 +39,9 @@ def test_get_items():
     assert len(items) > 0
     assert type(items[0]) is dict
     assert 'id' in items[0].keys()
-    assert 'desc' in items[0].keys()
+    assert 'description' in items[0].keys()
     assert type(items[0]['id']) is int
-    assert type(items[0]['desc']) is str
+    assert type(items[0]['description']) is str
     pass
 
 import time
@@ -55,7 +55,7 @@ def test_add_item():
     add_item(description)
     items = get_items()
     item = items[-1]
-    assert description == item['desc']
+    assert description == item['description']
 
 def test_delete_item():
     print("testing delete_item...")
@@ -63,11 +63,11 @@ def test_delete_item():
     add_item(description)
     items = get_items()
     item = items[-1]
-    assert description == item['desc']
+    assert description == item['description']
     delete_item(item['id'])
     items = get_items()
     for item in items:
-        assert description != item['desc']
+        assert description != item['description']
 
 def test_update_item():
     print("testing update_item...")
@@ -76,16 +76,16 @@ def test_update_item():
     items = get_items()
     item = items[-1]
     id = str(item['id'])
-    description = item['desc']
+    description = item['description']
     new_description = description.replace("1","9").replace(".",":")
     update_item(id, new_description)
     items = get_items()
     new_found = False
     for item in items:
         if item['id'] == int(id):
-            assert item['desc'] == new_description
+            assert item['description'] == new_description
             new_found = True
-        assert item['desc'] != description
+        assert item['description'] != description
     assert new_found
 
 
