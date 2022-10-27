@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Shopping List</h2>
+<h2>Shopping List data from peewee orm</h2>
 <hr/>
 <table>
 % for item in shopping_list:

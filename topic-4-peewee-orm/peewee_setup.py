@@ -12,10 +12,11 @@ def add_items_to_db():
     global db
     items = [
         { "description": 'apples' },
-        { "description": 'broccoli' },
-        { "description": 'pizza' },
-        { "description": 'tangerine' },
-        { "description": 'potatoes' }
+        { "description": 'guava' },
+        { "description": 'bananas' },
+        { "description": 'grapes' },
+        { "description": 'onioins' },
+        { "description": 'Tomato' }
         ]
     for item in items:
         Item.create(description=item['description'])
