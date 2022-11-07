@@ -3,24 +3,24 @@
 
 from pymongo import MongoClient
 import urllib.parse
+import json
+
+with open("C:/Users/devar/Desktop/Kent/mongo_pass.json", "r") as f:
+    private = json.load(f)
+
+password = private["devaraju"]
 
 username = urllib.parse.quote_plus('devaraju')
-password = urllib.parse.quote_plus('Raju@0424')
-client = MongoClient('mongodb+srv://%s:%s@mydatabase.kdw9m7f.mongodb.net/?retryWrites=true&w=majority' % (username, password))
-# import json
-# with open("/home/devarajug/mongo_pass.json","r") as f:
-#     private = json.load(f)
+password = urllib.parse.quote_plus(f'{password}')
+# client = MongoClient(
+#     'mongodb+srv://%s:%s@mydatabase.kdw9m7f.mongodb.net/?retryWrites=true&w=majority' % (username, password))
 
-# password = private["devaraju"]
-
-# client = MongoClient("mongodb+srv://devaraju:<Raju@0424>@drcluster.lurt0md.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(f"mongodb+srv://devaraju:{password}@drcluster.lurt0md.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
 
 # mongo_uri = "mongodb://devaraju:" + urllib.parse.quote("Raju@0424") + "@drcluster.lurt0md.mongodb.net/"
 # client = MongoClient(mongo_uri)
 # db = client.test
-
-from bson.objectid import ObjectId
 
 shopping_db = client.shopping_db
 list_collection = shopping_db.list_collection
@@ -28,13 +28,13 @@ list_collection = shopping_db.list_collection
 list_collection.delete_many({})
 
 list_collection.insert_many([
-        { "description": 'apples' },
-        { "description": 'guava' },
-        { "description": 'bananas' },
-        { "description": 'grapes' },
-        { "description": 'onioins' },
-        { "description": 'Tomato' }
-    ])
+    {"description": 'apples'},
+    {"description": 'guava'},
+    {"description": 'bananas'},
+    {"description": 'grapes'},
+    {"description": 'onioins'},
+    {"description": 'Tomato'}
+])
 
 items = list_collection.find()
 print(items)

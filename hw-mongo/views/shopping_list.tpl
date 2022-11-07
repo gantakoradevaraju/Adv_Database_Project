@@ -1,6 +1,7 @@
 <html>
 <body>
-<h2>Shopping List data from peewee orm</h2>
+<h2>Shopping List data from mongo database</h2>
+<h3> showing the ID that this data is from Mongo Database</h3>
 <hr/>
 <table>
 % for item in shopping_list:

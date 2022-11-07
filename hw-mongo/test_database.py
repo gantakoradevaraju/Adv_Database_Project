@@ -1,6 +1,7 @@
 # test_database.py - functions for testing database.py
+from mongo_database import *
+import time
 
-from mongita_database import get_items, add_item, delete_item, update_item
 
 def test_get_items():
     print("testing get_items...")
@@ -22,10 +23,9 @@ def test_get_items():
     assert type(items[0]['description']) is str
 
 
-import time
-
 def random_string():
     return str(time.time())
+
 
 def test_add_item():
     print("testing add_item...")
@@ -35,6 +35,7 @@ def test_add_item():
     item = items[-1]
     assert description == item['description']
     delete_item(item['id'])
+
 
 def test_delete_item():
     print("testing delete_item...")
@@ -48,6 +49,7 @@ def test_delete_item():
     for item in items:
         assert description != item['description']
 
+
 def test_update_item():
     print("testing update_item...")
     description = random_string()
@@ -56,7 +58,7 @@ def test_update_item():
     item = items[-1]
     id = str(item['id'])
     description = item['description']
-    new_description = description.replace("1","9").replace(".",":")
+    new_description = description.replace("1", "9").replace(".", ":")
     update_item(id, new_description)
     items = get_items()
     new_found = False
@@ -67,6 +69,7 @@ def test_update_item():
             new_found = True
         assert item['description'] != description
     assert new_found
+
 
 if __name__ == "__main__":
     test_get_items()
